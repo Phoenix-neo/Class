@@ -6,7 +6,7 @@ struct Vector {
 	int maxsize = 1;
 	int* a;
 	Vector() {
-	    a = (int*) malloc(1*sizeof(int));
+	    a = (int*) malloc(1 * sizeof(int));
 	}
 
 	void expand() {
@@ -15,7 +15,7 @@ struct Vector {
 	    int* b = (int*) malloc(maxsize * 2 * sizeof(int));
 	    for (int i = 0; i < size; i++)
 		    b[i] = a[i];
-	    delete(a);
+	    free(a);
 	    a = b;
 	    maxsize *= 2;
 	}
@@ -25,47 +25,45 @@ struct Vector {
 		int* b = (int*) malloc(maxsize / 2 * sizeof(int));
 		for (int i = 0; i < size; i++)
 			b[i] = a[i];
-		delete(a);
+		free(a);
 		maxsize /= 2;
 		a = b;
 	}
 
-	int find(int x, int * end) {
+	int find(int x) {
 		int cnt = 0;
-		for (auto i = this->begin(); a != this->end(); i++) {
-			if (*i == x)
+		for (int i = 0; i < size; i++) {
+			if (a[i] == x)
 				return cnt;
-			else
-				cnt++;
+			cnt++;
 		}
 	}
 	int get(int index) {
-		return *(this->begin() + index);
+		return a[index];
 	}
 
 	void push_back(int x) {
-		int * last = this->end();
+		a[size] = x;
 		if (size == maxsize)
-			this->expand();
-		int * i = last + 1;
-		* i = x;
+			expand();
+		size++;
 	}
 
 	void pop_back() {
 		if (!this->empty()) {
 			size--;
 			if (size == maxsize / 2) 
-				this->deduct();
+				deduct();
 		}
 	}
 	bool empty() {
-		if (this->begin() == this->end())
+		if (size == 0)
 			return true;
 		else 
 			return false;
 	}
 	int getsize() {
-		return this->end() - this->begin() + 1;
+		return size;
 	}
 	int back() {
 		if (!this->empty())
@@ -75,11 +73,11 @@ struct Vector {
 		return a;
 	}
 	int * end() {
-		return a + size;
+		return a + size - 1;
 	}
 };
 
 int main() {
 	Vector v;
+	return 0;
 }
-
