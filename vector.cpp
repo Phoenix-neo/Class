@@ -10,8 +10,6 @@ struct Vector {
 	}
 
 	void expand() {
-	    /// a ra 2 barar kon
-	    /// copy
 	    int* b = (int*) malloc(maxsize * 2 * sizeof(int));
 	    for (int i = 0; i < size; i++)
 		    b[i] = a[i];
@@ -22,7 +20,7 @@ struct Vector {
 
 
 	void deduct() {
-		int* b = (int*) malloc(maxsize / 2 * sizeof(int));
+		int* b = (int*) malloc((maxsize / 2) * sizeof(int));
 		for (int i = 0; i < size; i++)
 			b[i] = a[i];
 		free(a);
@@ -31,28 +29,29 @@ struct Vector {
 	}
 
 	int find(int x) {
-		int cnt = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++)
 			if (a[i] == x)
-				return cnt;
-			cnt++;
-		}
+				return i;
+		return -1;
 	}
 	int get(int index) {
-		return a[index];
+		if (!this->empty() && index < size)
+			return a[index];
+		else 
+			return -1;
 	}
 
 	void push_back(int x) {
-		a[size] = x;
-		if (size == maxsize)
+		if (size == maxsize - 1)
 			expand();
+		a[size] = x;
 		size++;
 	}
 
 	void pop_back() {
 		if (!this->empty()) {
 			size--;
-			if (size == maxsize / 2) 
+			if (size == (maxsize / 2) - 1) 
 				deduct();
 		}
 	}
@@ -68,6 +67,10 @@ struct Vector {
 	int back() {
 		if (!this->empty())
 			return (a[0]);
+	}
+	int front() {
+		if (!this->empty())
+			return a[size - 1];
 	}
 	int * begin() {
 		return a;
