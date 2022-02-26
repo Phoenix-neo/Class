@@ -76,7 +76,7 @@ struct Vector {
 		return a;
 	}
 	int * end() {
-		return a + size - 1;
+		return a + size;
 	}
 };
 
