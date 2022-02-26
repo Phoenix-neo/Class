@@ -74,5 +74,6 @@ struct Stack {
 
 int main() {
 	Stack s;
+	s.push(10);
 	return 0;
 }
