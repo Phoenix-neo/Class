@@ -10,21 +10,21 @@ struct Vector {
 	}
 
 	void expand() {
-	    int* b = (int*) malloc(maxsize * 2 * sizeof(int));
+	    maxsize *= 2;
+	    int* b = (int*) malloc(maxsize * sizeof(int));
 	    for (int i = 0; i < size; i++)
 		    b[i] = a[i];
 	    free(a);
 	    a = b;
-	    maxsize *= 2;
 	}
 
 
 	void deduct() {
-		int* b = (int*) malloc((maxsize / 2) * sizeof(int));
+		maxsize /= 2;
+		int* b = (int*) malloc(maxsize * sizeof(int));
 		for (int i = 0; i < size; i++)
 			b[i] = a[i];
 		free(a);
-		maxsize /= 2;
 		a = b;
 	}
 
@@ -37,8 +37,6 @@ struct Vector {
 	int get(int index) {
 		if (!this->empty() && index < size)
 			return a[index];
-		else 
-			return -1;
 	}
 
 	void push_back(int x) {
