@@ -1,3 +1,3 @@
 # Class
 Computer class  
-Implementing **vector** in c++ with some of its *methods*.
+Implementing **vector**, **stack**, and **queue** data structures in c++ with some of their *methods*.
